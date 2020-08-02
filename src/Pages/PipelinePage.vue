@@ -20,7 +20,7 @@
     :data ="tableData"
     height="250"
     border
-    style="width: 100%">
+    style="width: 100%" >
     <el-table-column
       prop="date"
       label="日期"
@@ -137,5 +137,6 @@ a {
 
 .tilte {
   background-color: #42b983;
+  background-image: url("~@/assets/images/dashboard.jpg");
 }
 </style>

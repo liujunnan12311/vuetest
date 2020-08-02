@@ -5,17 +5,18 @@
     </div>
     <div>
         <div class="block">
-          <span class="demonstration">日期结果</span>
+          <span class="demonstration">日期</span>
           <el-date-picker
             v-model="value3"
             type="datetime"
             placeholder="选择日期时间"
             default-time="12:00:00">
           </el-date-picker>
+          <el-button type="primary" icon="el-icon-search">搜索</el-button>
         </div>
-    <el-button type="primary" icon="el-icon-search">搜索</el-button>
+    
     </div>
-
+<br>
     <el-table
     :data ="tableData"
     height="250"
@@ -28,16 +29,18 @@
     </el-table-column>
     <el-table-column
       prop="name"
-      label="姓名"
+      label="状态"
       width="180">
     </el-table-column>
     <el-table-column
       prop="address"
-      label="地址">
+      label="用例名字">
     </el-table-column>
   </el-table>
  
   </div>
+  
+
 </template>
 
 <script>
@@ -103,6 +106,7 @@ export default {
     }
   }
 }
+
 </script>
 
 
@@ -136,7 +140,11 @@ a {
 }
 
 .tilte {
-  background-color: #42b983;
-  background-image: url("~@/assets/images/dashboard.jpg");
+  
+  background: url("../assets/images/dashboard.jpg") no-repeat ;
+  background-size: auto 100%;
+  background:cyan;
+ 
 }
 </style>
+

@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <div class="tilte">
+      
      <h1>{{ msg }}</h1>
     </div>
     <div>
@@ -12,7 +13,8 @@
             placeholder="选择日期时间"
             default-time="12:00:00">
           </el-date-picker>
-          <el-button type="primary" icon="el-icon-search">搜索</el-button>
+          <el-button type="primary" icon="el-icon-search" @click="parseXML">搜索</el-button>
+          <button @click="getData()">请求数据</button>
         </div>
     
     </div>
@@ -51,32 +53,32 @@ export default {
       msg: 'Jenkins Pipeline DashBoard',
       tableData: [{
           date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          name: 'pass',
+          address: 'API_TestName'
         }, {
           date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          name: 'pass',
+          address: 'API_TestName'
         }, {
           date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          name: 'pass',
+          address: 'API_TestName'
         }, {
           date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          name: 'pass',
+          address: 'API_TestName'
         }, {
           date: '2016-05-08',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          name: 'pass',
+          address: 'API_TestName'
         }, {
           date: '2016-05-06',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          name: 'pass',
+          address: 'API_TestName'
         }, {
           date: '2016-05-07',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          name: 'pass',
+          address: 'API_TestName'
         }],
         pickerOptions: {
           shortcuts: [{
@@ -104,11 +106,23 @@ export default {
         value2: '',
         value3: ''
     }
+  },
+  methods:{
+    getData()
+    {
+      var api = "";
+       this.$http.get(api).then(function(res){
+                    document.write(res.body);    
+                },function(err){
+                    console.log(err);
+                });
+    }
   }
+ 
+     
 }
 
 </script>
-
 
 
 <style>
@@ -143,7 +157,7 @@ a {
   
   background: url("../assets/images/dashboard.jpg") no-repeat ;
   background-size: auto 100%;
-  background:cyan;
+  background:cornflowerblue;
  
 }
 </style>

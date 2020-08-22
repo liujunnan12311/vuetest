@@ -14,7 +14,7 @@
             default-time="12:00:00">
           </el-date-picker>
           <el-button type="primary" icon="el-icon-search" @click="parseXML">搜索</el-button>
-          <button @click="getData()">请求数据</button>
+          <button @click="getData">请求数据</button>
         </div>
     
     </div>
@@ -110,7 +110,7 @@ export default {
   methods:{
     getData()
     {
-      var api = "";
+      var api = "http://www.kuaidi100.com/query?type=快递公司代号&postid=快递单号";
        this.$http.get(api).then(function(res){
                     document.write(res.body);    
                 },function(err){

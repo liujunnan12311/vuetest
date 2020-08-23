@@ -49,10 +49,23 @@ module.exports = {
     },
     extensions: ['*', '.js', '.vue', '.json']
   },
+  
   devServer: {
     historyApiFallback: true,
     noInfo: true,
-    overlay: true
+    overlay: true,
+    proxy:{
+      '/api':{
+        target: 'http://www.kuaidi100.com',//目标服务器
+        changeOrigin: true, 
+        secure: false,  
+        credentials: 'include', 
+        pathRewrite: {
+            '^/api': '' 
+        }
+      }
+    }
+  
   },
   performance: {
     hints: false

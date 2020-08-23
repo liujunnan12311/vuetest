@@ -6,6 +6,7 @@ import VueResource from 'vue-resource';
 Vue.use(VueResource);
 import axios from 'axios' //引入axios
 
+
 Vue.prototype.$ajax=axios //修改Vue的原型属性
 
 Vue.use(ElementUI)

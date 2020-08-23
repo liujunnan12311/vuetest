@@ -13,32 +13,35 @@
             placeholder="选择日期时间"
             default-time="12:00:00">
           </el-date-picker>
-          <el-button type="primary" icon="el-icon-search" @click="parseXML">搜索</el-button>
-          <button @click="getData">请求数据</button>
+          <el-button type="primary" icon="el-icon-search">搜索</el-button>
+          <button v-on:click="getData1()">请求数据</button>
+
         </div>
     
     </div>
 <br>
+<div>
     <el-table
     :data ="tableData"
     height="250"
     border
     style="width: 100%" >
     <el-table-column
-      prop="date"
+      prop="title"
       label="日期"
       width="180">
     </el-table-column>
     <el-table-column
-      prop="name"
+      prop="aid"
       label="状态"
       width="180">
     </el-table-column>
     <el-table-column
-      prop="address"
+      prop="dateline"
       label="用例名字">
     </el-table-column>
   </el-table>
+  </div>
  
   </div>
   
@@ -51,35 +54,36 @@ export default {
   data () {
     return {
       msg: 'Jenkins Pipeline DashBoard',
-      tableData: [{
-          date: '2016-05-03',
-          name: 'pass',
-          address: 'API_TestName'
-        }, {
-          date: '2016-05-02',
-          name: 'pass',
-          address: 'API_TestName'
-        }, {
-          date: '2016-05-04',
-          name: 'pass',
-          address: 'API_TestName'
-        }, {
-          date: '2016-05-01',
-          name: 'pass',
-          address: 'API_TestName'
-        }, {
-          date: '2016-05-08',
-          name: 'pass',
-          address: 'API_TestName'
-        }, {
-          date: '2016-05-06',
-          name: 'pass',
-          address: 'API_TestName'
-        }, {
-          date: '2016-05-07',
-          name: 'pass',
-          address: 'API_TestName'
-        }],
+      tableData: [],
+      tableData1: [{
+          date: '2016-05-03',
+          name: 'pass',
+          address: 'API_TestName'
+        }, {
+          date: '2016-05-02',
+          name: 'pass',
+          address: 'API_TestName'
+        }, {
+          date: '2016-05-04',
+          name: 'pass',
+          address: 'API_TestName'
+        }, {
+          date: '2016-05-01',
+          name: 'pass',
+          address: 'API_TestName'
+        }, {
+          date: '2016-05-08',
+          name: 'pass',
+          address: 'API_TestName'
+        }, {
+          date: '2016-05-06',
+          name: 'pass',
+          address: 'API_TestName'
+        }, {
+          date: '2016-05-07',
+          name: 'pass',
+          address: 'API_TestName'
+        }],
         pickerOptions: {
           shortcuts: [{
             text: '今天',
@@ -108,14 +112,25 @@ export default {
     }
   },
   methods:{
-    getData()
+    getData1()
     {
-      var api = "http://www.kuaidi100.com/query?type=快递公司代号&postid=快递单号";
-       this.$http.get(api).then(function(res){
-                    document.write(res.body);    
-                },function(err){
-                    console.log(err);
-                });
+    
+      var api = "http://www.phonegap100.com/appapi.php?a=getPortalList&catid=20&page=1";
+      this.$http.get(api).then((response)=>{
+        console.log(response);
+        console.log("1111");
+
+        this.tableData = response.body.result;
+        console.log(this.tableData);
+        
+      },function(err)
+      {
+        console.log(err);
+      })
+                 
+                 
+                 
+                
     }
   }
  

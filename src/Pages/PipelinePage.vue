@@ -13,7 +13,7 @@
             placeholder="选择日期时间"
             default-time="12:00:00">
           </el-date-picker>
-          <el-button type="primary" icon="el-icon-search">搜索</el-button>
+          <el-button  type="primary" icon="el-icon-search" @click="getData1" >搜索</el-button>
           <button v-on:click="getData1()">请求数据</button>
 
         </div>
@@ -23,22 +23,21 @@
 <div>
     <el-table
     :data ="tableData"
-    height="250"
-    border
-    style="width: 100%" >
+    height="800"
+    style="width: 100%; height:90%" >
     <el-table-column
-      prop="title"
-      label="日期"
+      prop="className"
+      label="Class Name"
       width="180">
     </el-table-column>
     <el-table-column
-      prop="aid"
+      prop="status"
       label="状态"
       width="180">
     </el-table-column>
     <el-table-column
-      prop="dateline"
-      label="用例名字">
+      prop="name"
+      label="Case Name">
     </el-table-column>
   </el-table>
   </div>
@@ -115,12 +114,28 @@ export default {
     getData1()
     {
     
-      var api = "http://www.phonegap100.com/appapi.php?a=getPortalList&catid=20&page=1";
-      this.$http.get(api).then((response)=>{
+      var api = "/api/job/CoreProducts_Teams/job/APX/job/APX_UI_Team/job/APX_API/job/RUN_APX_API_BAT/943/testReport/api/json";
+      console.log(api);
+      var options = {
+          headers: 
+          {
+            
+            'Authorization'               : 'Basic [dmxpdTpKdW4xOTI0MTkh]',
+            'Access-Control-Allow-Headers': 'Content-Type'
+          
+            
+          }
+      }
+      
+      this.$http.get('/api/job/CoreProducts_Teams/job/APX/job/APX_UI_Team/job/APX_API/job/RUN_APX_API_BAT/943/testReport/api/json',{
+          headers: {
+            'Authorization': 'Basic dmxpdTpKdW4xOTI0MTkh'
+          }
+        }).then((response)=>{
         console.log(response);
         console.log("1111");
 
-        this.tableData = response.body.result;
+        this.tableData = response.body.suites[0].cases;
         console.log(this.tableData);
         
       },function(err)

@@ -56,7 +56,7 @@ module.exports = {
     overlay: true,
     proxy:{
       '/api':{
-        target: 'http://www.kuaidi100.com',//目标服务器
+        target: 'http://sfjenkin.advent.com',//目标服务器
         changeOrigin: true, 
         secure: false,  
         credentials: 'include', 

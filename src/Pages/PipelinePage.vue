@@ -14,17 +14,22 @@
             default-time="12:00:00">
           </el-date-picker>
           <el-button  type="primary" icon="el-icon-search" @click="getData1" >搜索</el-button>
-          <button v-on:click="getData1()">请求数据</button>
+        </div>
 
+        <div style="padding: 50px;" > 
+          <el-progress :percentage="0" :format="format" ></el-progress>
         </div>
     
     </div>
 <br>
-<div>
+  <div>
     <el-table
     :data ="tableData"
-    height="800"
+    stripe
+    :row-class-name="tableRowClassName"
+    height="600"
     style="width: 100%; height:90%" >
+    
     <el-table-column
       prop="className"
       label="Class Name"
@@ -41,6 +46,18 @@
     </el-table-column>
   </el-table>
   </div>
+
+  <div class="block">
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="currentPage4"
+      :page-sizes="[100, 200, 300, 400]"
+      :page-size="100"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="400">
+    </el-pagination>
+  </div>
  
   </div>
   
@@ -53,36 +70,9 @@ export default {
   data () {
     return {
       msg: 'Jenkins Pipeline DashBoard',
+      passRate:0,
       tableData: [],
-      tableData1: [{
-          date: '2016-05-03',
-          name: 'pass',
-          address: 'API_TestName'
-        }, {
-          date: '2016-05-02',
-          name: 'pass',
-          address: 'API_TestName'
-        }, {
-          date: '2016-05-04',
-          name: 'pass',
-          address: 'API_TestName'
-        }, {
-          date: '2016-05-01',
-          name: 'pass',
-          address: 'API_TestName'
-        }, {
-          date: '2016-05-08',
-          name: 'pass',
-          address: 'API_TestName'
-        }, {
-          date: '2016-05-06',
-          name: 'pass',
-          address: 'API_TestName'
-        }, {
-          date: '2016-05-07',
-          name: 'pass',
-          address: 'API_TestName'
-        }],
+     
         pickerOptions: {
           shortcuts: [{
             text: '今天',
@@ -114,7 +104,7 @@ export default {
     getData1()
     {
     
-      var api = "/api/job/CoreProducts_Teams/job/APX/job/APX_UI_Team/job/APX_API/job/RUN_APX_API_BAT/943/testReport/api/json";
+      var api = "/api/job/CoreProducts_Teams/job/APX/job/APX_UI_Team/job/APX_API/job/RUN_APX_API_BAT/963/testReport/api/json";
       console.log(api);
       var options = {
           headers: 
@@ -127,16 +117,22 @@ export default {
           }
       }
       
-      this.$http.get('/api/job/CoreProducts_Teams/job/APX/job/APX_UI_Team/job/APX_API/job/RUN_APX_API_BAT/943/testReport/api/json',{
+      this.$http.get(api,{
           headers: {
             'Authorization': 'Basic dmxpdTpKdW4xOTI0MTkh'
           }
         }).then((response)=>{
         console.log(response);
-        console.log("1111");
 
         this.tableData = response.body.suites[0].cases;
-        console.log(this.tableData);
+        var failCount = parseFloat(response.body.failCount.toString());
+        var passCount = parseFloat(response.body.passCount.toString());
+        var skipCountCount = parseFloat(response.body.skipCount.toString());
+       // console.log( passCount);
+        var aa = passCount/(failCount + passCount + skipCount + 10);
+ console.log( "1111111111111111111111111");
+ console.log("111-----" );
+        //console.log( this.passRate);
         
       },function(err)
       {
@@ -146,8 +142,20 @@ export default {
                  
                  
                 
+    },
+    tableRowClassName({row, rowIndex}) {
+      console.log(row.status);
+
+
+        if (row.status == 'FAILED') {
+          return 'warning-row';
+        } else if (row.status == 'PASSED') {
+          return 'success-row';
+        }
+        return '';
+      }
     }
-  }
+  
  
      
 }
@@ -190,5 +198,15 @@ a {
   background:cornflowerblue;
  
 }
+
+
+.el-table .warning-row {
+  background: oldlace;
+}
+
+.el-table .success-row {
+  background: #f0f9eb;
+}
+
 </style>
 
